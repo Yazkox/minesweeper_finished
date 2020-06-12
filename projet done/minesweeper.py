@@ -144,7 +144,7 @@ def start_game(attributes):
 
 
         display_grid(game_grid)
-        game_grid.checkwon()
+        game_grid.check_won()
         pygame.display.flip()
     while True :
         for event in pygame.event.get():
