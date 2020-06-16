@@ -172,23 +172,23 @@ def start_game(attributes):
         clock.tick(FPS)
         game_window.blit(background, (0, 0))
         timer = trunc(100*(time.time()-starting_time))/100
-        mine_amount_display = title_font.render("Mine restantes : " + str(game_grid.mine_left()), True, (0, 0, 0))
-        timer_display = title_font.render("Timer " + str(timer), True, (0, 0, 0))
+        mine_amount_display = title_font.render("Mine restantes : " + str(game_grid.mine_left()), True, (0, 0, 0)) # On affiche le nombre de mines restantes
+        timer_display = title_font.render("Timer " + str(timer), True, (0, 0, 0))  # On affiche le timer
         pygame.draw.rect(game_window, (175, 201, 26), ((20,20), (250, 150)))
         game_window.blit(mine_amount_display, (30, 50))
         game_window.blit(timer_display, (30, 110))
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT: # Si on ferme la fenêtre via le bouton, ça la ferme
                 pygame.quit()
-            if event.type == pygame.MOUSEBUTTONUP:
-                    if event.button == 1:
-                        x,y = on_click()
-                        if attributes[1]>x>=0 and attributes[0]>y>=0:
-                            game_grid.check(x,y)
-                    if event.button == 3 :
-                        x, y = on_click()
-                        if attributes[1] > x >= 0 and attributes[0] > y >= 0:
-                            game_grid.frame_array[y][x].flag()
+            if event.type == pygame.MOUSEBUTTONUP: # Si on clique
+                    if event.button == 1: # Si clique gauche
+                        x,y = on_click() # On récupère les coordonnées de la case où on a cliqué
+                        if attributes[1]>x>=0 and attributes[0]>y>=0: # Si elles sont valides
+                            game_grid.check(x,y) # On découvre la case
+                    if event.button == 3 :  # Si clique droit
+                        x, y = on_click() # On récupère les coordonnées
+                        if attributes[1] > x >= 0 and attributes[0] > y >= 0: # Si elles sont valides
+                            game_grid.frame_array[y][x].flag() # On flag la case
 
 
         display_grid(game_grid)
